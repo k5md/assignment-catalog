@@ -1,0 +1,184 @@
+var webpack = require('webpack');
+var path = require('path');
+const {
+  spawn
+} = require('child_process');
+const {
+  dependencies: externals
+} = require('./app/package.json');
+
+// variables
+var isProduction = process.argv.indexOf('-p') >= 0;
+var sourcePath = path.join(__dirname, './app');
+var outPath = path.join(__dirname, './app/dist');
+const port = process.env.PORT || 3000;
+
+// plugins
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const tsImportPluginFactory = require('ts-import-plugin');
+
+module.exports = {
+  context: sourcePath,
+  entry: [
+    './app.tsx'
+  ],
+  output: {
+    path: outPath,
+    filename: 'bundle.js',
+    //publicPath: '/'
+    publicPath: !isProduction ? `http://localhost:${port}/dist/` : './',
+    libraryTarget: 'commonjs2'
+  },
+
+  target: 'electron-renderer',
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.less'],
+    // Fix webpack's default behavior to not load packages with jsnext:main module
+    // (jsnext:main directs not usually distributable es6 format, but es6 sources)
+    mainFields: ['module', 'browser', 'main'],
+    alias: {
+      //'app': path.resolve(__dirname, 'app/')
+    }
+  },
+  module: {
+    rules: [
+      // .ts, .tsx
+      {
+        test: /\.(jsx|tsx|js|ts)$/,
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [
+              tsImportPluginFactory({
+                libraryName: 'antd',
+                libraryDirectory: 'lib',
+                style: true
+              }),
+            ],
+          }),
+          compilerOptions: {
+            module: 'es2015'
+          }
+        },
+        exclude: /node_modules/,
+      },
+      // less
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader', // creates style nodes from JS strings
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+          },
+          {
+            loader: 'less-loader', // compiles Less to CSS
+            options: {
+              javascriptEnabled: true,
+            }
+          },
+        ],
+      },
+      // css
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader',
+              query: {
+                sourceMap: !isProduction,
+                importLoaders: 1,
+                modules: {
+                  localIdentName: '[local]__[hash:base64:5]',
+                },
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: [
+                  require('postcss-import')({
+                    addDependencyTo: webpack
+                  }),
+                  require('postcss-url')(),
+                  require('postcss-cssnext')(),
+                  require('postcss-reporter')(),
+                  require('postcss-browser-reporter')({
+                    disabled: isProduction
+                  })
+                ]
+              }
+            }
+          ]
+        })
+      },
+      // static assets
+      {
+        test: /\.html$/,
+        use: 'html-loader'
+      },
+    ]
+  },
+  // optimization: {
+  //   splitChunks: {
+  //     name: true,
+  //     cacheGroups: {
+  //       commons: {
+  //         chunks: 'initial',
+  //         minChunks: 2
+  //       },
+  //       vendors: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         chunks: 'all',
+  //         priority: -10
+  //       }
+  //     }
+  //   },
+  //   runtimeChunk: true
+  // },
+  plugins: [
+    new WebpackCleanupPlugin(),
+    new ExtractTextPlugin({
+      filename: 'styles.css',
+      disable: !isProduction
+    }),
+    // new HtmlWebpackPlugin({
+    //   template: 'assets/index.html'
+    // })
+  ],
+
+  externals: Object.keys(externals || {}),
+
+  devServer: {
+    contentBase: sourcePath,
+    hot: true,
+    inline: true,
+    historyApiFallback: {
+      disableDotRule: true
+    },
+    stats: 'minimal',
+    after: function (app) {
+      spawn('npm', ['run', 'start-hot'], {
+          shell: true,
+          env: process.env,
+          stdio: 'inherit'
+        })
+        .on('close', code => process.exit(code))
+        .on('error', spawnError => console.error(spawnError));
+    }
+  },
+  devtool: 'cheap-module-eval-source-map',
+  node: {
+    // workaround for webpack-dev-server issue
+    // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
+  }
+};

@@ -1,0 +1,8 @@
+{
+  "name": "assignment-catalog",
+  "version": "0.0.1",
+  "main": "./main/main.js",
+  "author": "k5md",
+  "license": "MIT",
+  "dependencies": {}
+}

@@ -125,6 +125,7 @@
     "mobx": "^5.5.2",
     "mobx-react-router": "^4.0.5",
     "mobx-state-tree": "^3.14.1",
-    "react-dom": "^16.6.0"
+    "react-dom": "^16.6.0",
+    "react-virtualized": "^9.21.1"
   }
 }

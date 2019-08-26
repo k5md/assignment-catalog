@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader';
 import { Router, Route, Switch } from 'react-router';
 import { Root } from './containers/Root';
 import { TodoApp } from './containers/TodoApp';
+import 'react-virtualized/styles.css'
 
 // render react DOM
 export const App = hot(module)(({ history }) => (

@@ -2,19 +2,15 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { STORE_PRODUCTS } from '../../constants';
 import { ProductStoreModel } from '../../stores/ProductStore';
-import { ProductList } from '../../components/ProductList';
+import { ProductTable } from '../../components/ProductTable';
 
 @inject(STORE_PRODUCTS)
 @observer
 export class Products extends React.Component<{productStore: ProductStoreModel}> {
   render() {
-    const { products, length } = this.props[STORE_PRODUCTS];
-    console.log(length);
+    const { products } = this.props[STORE_PRODUCTS];
     return (
-      <React.Fragment>
-        <div>Products</div>
-        <ProductList products={products} />
-      </React.Fragment>
+      <ProductTable products={products} />
     );
   }
 }

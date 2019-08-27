@@ -3,7 +3,7 @@
     "sourceMap": true,
     "target": "es5",
     "jsx": "react",
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

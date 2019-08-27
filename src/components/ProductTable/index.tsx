@@ -5,26 +5,31 @@ import { IProduct } from '../../models/ProductModel';
 
 import _ from 'lodash';
 
-export interface ProductListProps {
+export interface ProductTableProps {
   products: Array<IProduct>,
 }
-export interface ProductListState {}
+export interface ProductTableState {}
 
-const headers = ['id', 'name', 'color', 'inStock', 'dateReceipt'];
+const headers = ['id', 'name', 'type', 'color', 'size', 'inStock', 'dateReceipt'];
 
-export class ProductList extends React.Component<ProductListProps, ProductListState> {
+export class ProductTable extends React.Component<ProductTableProps, ProductTableState> {
+  cellRenderer({
+    cellData,
+    dataKey,
+  }) {
+    return <div style={{backgroundColor:  dataKey === 'color' ? cellData : 'unset'}}>
+    {cellData.toString()}</div>
+  }
   render() {
-    // const { products } = this.props;
     const { products } = this.props;
-
     return (
       <AutoSizer>
       {({width, height}) => (
         <Table
           width={width}
           height={height}
-          headerHeight={30}
-          rowHeight={40}
+          headerHeight={36}
+          rowHeight={36}
           rowCount={products.length}
           rowGetter={({ index }) => products[index]}
         >
@@ -35,6 +40,7 @@ export class ProductList extends React.Component<ProductListProps, ProductListSt
               dataKey={header}
               width={width}
               cellDataGetter={({ rowData }) => rowData[header]}
+              cellRenderer={this.cellRenderer}
             />
           ))}
         </Table>

@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const tsImportPluginFactory = require('ts-import-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -21,6 +22,13 @@ module.exports = {
         loader: 'ts-loader',
         options: {
           transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [ tsImportPluginFactory({
+              libraryName: 'antd',
+              libraryDirectory: 'lib',
+              style: true,
+            })]
+          }),
           compilerOptions: {
             module: 'es2015'
           }

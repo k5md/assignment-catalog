@@ -1,6 +1,6 @@
 import { IProduct, Product } from '../models/ProductModel';
 import { ProductStore } from './ProductStore';
-import productsJson from '../assets/products.json';
+import productsJson from '../../products.json';
 import { ColorFilter, InStockFilter } from '../models/FilterModel';
 
 export const createStores = () => {

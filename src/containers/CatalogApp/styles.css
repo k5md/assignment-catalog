@@ -1,3 +1,12 @@
+.root {
+  height: 100vh;
+  width: 100vw;
+}
+
+.content {
+  height: 100vh;
+}
+
 .sider {
-  width: 30%;
+  height: 100vh;
 }

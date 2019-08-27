@@ -1,22 +1,20 @@
 import * as React from 'react';
-import { Layout } from 'antd';
+import { Row, Col } from 'antd';
 import { Products } from '../Products';
 import { Filters } from '../Filters';
 import * as styles from './styles.css';
 
-const { Content, Sider } = Layout;
-
 export class CatalogApp extends React.Component {
   render() {
     return (
-      <Layout className={styles.root}>
-        <Content className={styles.content}>
+      <Row gutter={24} className={styles.root}>
+        <Col span={18} className={styles.content}>
           <Products />
-        </Content>
-        <Sider className={styles.sider} width="400">
-         <Filters />
-        </Sider>
-      </Layout>
+        </Col>
+        <Col span={6} className={styles.sider}>
+          <Filters />
+        </Col>
+      </Row>
     );
   }
 }

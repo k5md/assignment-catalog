@@ -25,10 +25,10 @@ const productSizesLiterals = asLiterals(productSizes);
 
 interface IProduct {
   id: number,
+  type: 'Верхняя одежда' | 'Белье' | 'Штанишки',
   name: string,
-  type: typeof productTypesLiterals[number],
+  size: 'S' | 'M' | 'L' | 'XL',
   color: string,
-  size: typeof productSizesLiterals[number],
   inStock: boolean,
   dateReceipt: string,
 }
@@ -36,14 +36,15 @@ interface IProduct {
 class Product implements IProduct {
   id: number =  _.uniqueId();
   name: string = faker.commerce.productName();
-  type: typeof productTypesLiterals[number] = faker.random.arrayElement(productTypes);
+  type: 'Верхняя одежда' | 'Белье' | 'Штанишки' = faker.random.arrayElement(productTypesLiterals);
   color: string = getRandomColor();
-  size: typeof productSizesLiterals[number] = faker.random.arrayElement(productSizes);
+  size: 'S' | 'M' | 'L' | 'XL' = faker.random.arrayElement(productSizesLiterals);
   inStock: boolean = faker.random.boolean();
   dateReceipt: string = format(new Date(faker.date.past()), 'yyyy-MM-dd');
 }
 
 const dataset = Array.from(Array(datasetSize).keys()).map(() => new Product());
 
+
 const json = JSON.stringify(dataset);
-fs.writeFile('../assets/products.json', json, 'utf8', () => ({}));
+fs.writeFileSync('products.json', json, 'utf8', () => ({}));

@@ -13,7 +13,7 @@ export class CatalogApp extends React.Component {
         <Content className={styles.content}>
           <Products />
         </Content>
-        <Sider className={styles.sider}>
+        <Sider className={styles.sider} width="400">
          <Filters />
         </Sider>
       </Layout>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Select, Checkbox, DatePicker } from 'antd';
+import { Form, Select, Checkbox, DatePicker, Button } from 'antd';
 import moment from 'moment';
 import { SketchPicker } from 'react-color';
 const { RangePicker } = DatePicker;
@@ -14,9 +14,11 @@ import { STORE_PRODUCTS, FilterTypes } from '../../constants';
 @observer
 export class Filters extends React.Component {
   render() {
-    const setInStock = (inStock) => {
-      this.props[STORE_PRODUCTS]._filters[1].setInStock(inStock);
+    const toggle = () => {
+      this.props[STORE_PRODUCTS]._filters[1].toggle();
     };
+
+    const inStock = this.props[STORE_PRODUCTS]._filters[1].inStock;
 
     return (
       <React.Fragment>
@@ -26,7 +28,6 @@ export class Filters extends React.Component {
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder="Select a person"
               optionFilterProp="children"
               filterOption={(input, option) =>
                 option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -56,7 +57,7 @@ export class Filters extends React.Component {
             </Select>
           </Form.Item>
           <Form.Item label="В наличии">
-            <Checkbox onChange={(e) => setInStock(e.target.checked)}></Checkbox>
+            <Checkbox onChange={() => toggle()} value={inStock}></Checkbox>
           </Form.Item>
           <Form.Item>
             <RangePicker

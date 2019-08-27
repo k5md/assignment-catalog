@@ -3,7 +3,9 @@ import { types } from 'mobx-state-tree';
 export const Filter = types
   .model({
     isEnabled: false,
+    //type: null,
     color: '#ffffff',
+    //size: null,
     inStock: false,
   })
   .actions((self) => {
@@ -16,12 +18,25 @@ export const Filter = types
     return { filter, toggle };
   });
 
+export const TypeFilter = Filter
+  .named('TypeFilter')
+  .actions((self) => {
+    const filter = (products) => {
+      return products.filter(product => product.type === self.type);
+    };
+
+    const setType = (type) => {
+      self.type = type;
+    };
+
+    return { filter, setType };
+  });
+
 export const ColorFilter = Filter
   .named('ColorFilter')
   .actions((self) => {
     const filter = (products) => {
-
-      return products.filter(product => product.type === self.color);
+      return products.filter(product => product.color === self.color);
     };
 
     const setColor = (color) => {
@@ -31,21 +46,28 @@ export const ColorFilter = Filter
     return { filter, setColor };
   });
 
-  export const InStockFilter = Filter
+export const SizeFilter = Filter
+  .named('SizeFilter')
+  .actions((self) => {
+    const filter = (products) => {
+      return products.filter(product => product.size === self.size);
+    };
+
+    const setSize = (size) => {
+      self.size = size;
+    };
+
+    return { filter, setSize };
+  });
+
+export const InStockFilter = Filter
   .named('InStockFilter')
   .actions((self) => {
     const filter = (products) => {
-      console.log('in filter', products);
-      return products.filter(product => product.inStock === self.inStock);
+      return products.filter(product => product.inStock);
     };
 
-    const setInStock = (inStock) => {
-      console.log('click', inStock);
-      self.isEnabled = true;
-      self.inStock = inStock;
-    };
-
-    return { filter, setInStock };
+    return { filter };
   });
 
 export default Filter;

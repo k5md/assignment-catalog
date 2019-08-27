@@ -6,5 +6,5 @@ release
 *.log*
 build
 dist
-app/dist
 package-lock.json
+src/assets/products.json

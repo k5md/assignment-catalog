@@ -11,8 +11,8 @@ const { Group: InputGroup } = Input;
 const filters = [
   { filterName: 'ColorFilter', Component: Color, title: 'Цвет' },
   { filterName: 'InStockFilter', Component: Checkbox, title: 'В наличии'},
-  { filterName: 'SizeFilter', Component: Select, title: 'Размер', options: PRODUCT_SIZES },
   { filterName: 'TypeFilter', Component: Select, title: 'Тип', options: PRODUCT_TYPES },
+  { filterName: 'SizeFilter', Component: Select, title: 'Размер', options: PRODUCT_SIZES },
   { filterName: 'InDateRangeFilter', Component: DateRange, title: 'Период' },
 ];
 

@@ -1,24 +1,20 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { CatalogApp } from './containers/CatalogApp';
+import { Provider } from 'mobx-react';
+
 import '!style-loader!css-loader?modules=false!react-virtualized/styles.css';
 
-// render react DOM
-import { Provider } from 'mobx-react';
-import { createStores } from './stores/createStore';
+import { createStore } from './stores/createStore';
+import productsJson from '../products.json';
+import { CatalogApp } from './containers/CatalogApp';
 
-const rootStore = createStores();
+const rootStore = createStore(productsJson);
 
-export const App = () => (
+const App = () => (
   <Provider {...rootStore}>
     <CatalogApp />
   </Provider>
 );
 
 const container = document.getElementById('container');
-
-const mount = () => {
-  ReactDOM.render(<App />, container);
-};
-
-mount();
+ReactDOM.render(<App />, container);

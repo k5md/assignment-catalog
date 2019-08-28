@@ -1,18 +1,17 @@
-import { IProduct, Product } from '../models/ProductModel';
+import { IProduct, Product, ProductModel } from '../models/ProductModel';
 import { ProductStore } from './ProductStore';
-import productsJson from '../../products.json';
-import { ColorFilter, InStockFilter } from '../models/FilterModel';
+import { FILTER_TYPES } from '../constants';
 
-export const createStores = () => {
+export const createStore = (products) => {
   const productStore = ProductStore.create({
-    _products: productsJson.map((product)  => {
+    _products: products.map((product): Array<ProductModel>  => {
       const preparedProduct: IProduct = {
         ...product,
         id: Number.parseInt(product.id),
       };
       return Product.create(preparedProduct);
     }),
-    _filters: [ColorFilter, InStockFilter].map(filter => filter.create()),
+    _filters: FILTER_TYPES.map(filter => filter.create()),
   });
 
   return { productStore };

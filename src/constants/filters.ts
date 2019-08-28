@@ -1,15 +1,25 @@
-export enum FilterTypes {
-  TYPE,
-  COLOR,
-  SIZE,
-  INSTOCK,
-  DATE,
-}
+import {
+  IFilter,
+  ColorFilter,
+  InStockFilter,
+  TypeFilter,
+  SizeFilter,
+  InDateRangeFilter
+} from '../models/FilterModel';
 
 export const FILTER_TYPES = [
-  FilterTypes.TYPE,
-  FilterTypes.COLOR,
-  FilterTypes.SIZE,
-  FilterTypes.INSTOCK,
-  FilterTypes.DATE,
+  ColorFilter,
+  InStockFilter,
+  TypeFilter,
+  SizeFilter,
+  InDateRangeFilter,
 ];
+
+export enum FILTER_TYPE {
+  ColorFilter,
+  InStockFilter,
+  TypeFilter,
+  SizeFilter,
+  InDateRangeFilter,
+}
+export type FILTER_TYPE_LITERAL = IFilter;

@@ -1,10 +1,7 @@
 const _ = require('lodash');
 const faker = require('faker/locale/ru');
 const fs = require('fs');
-const { format } = require('date-fns');
-
-// https://www.reddit.com/r/typescript/comments/amh8cu/dynamically_build_typescript_string_literal_type/eflx6at/
-const asLiterals = <T extends string>(arr: T[]): T[] => arr;
+const moment = require('moment');
 
 const getRandomColor = (): string => {
   const rgb = Array(3).fill(null).map(() => {
@@ -20,8 +17,6 @@ const datasetSize = 1000;
 
 const productTypes = ['Верхняя одежда', 'Белье', 'Штанишки'];
 const productSizes = ['S', 'M', 'L', 'XL'];
-const productTypesLiterals = asLiterals(productTypes)
-const productSizesLiterals = asLiterals(productSizes);
 
 interface IProduct {
   id: number,
@@ -36,15 +31,14 @@ interface IProduct {
 class Product implements IProduct {
   id: number =  _.uniqueId();
   name: string = faker.commerce.productName();
-  type: 'Верхняя одежда' | 'Белье' | 'Штанишки' = faker.random.arrayElement(productTypesLiterals);
+  type: 'Верхняя одежда' | 'Белье' | 'Штанишки' = faker.random.arrayElement(productTypes);
   color: string = getRandomColor();
-  size: 'S' | 'M' | 'L' | 'XL' = faker.random.arrayElement(productSizesLiterals);
+  size: 'S' | 'M' | 'L' | 'XL' = faker.random.arrayElement(productSizes);
   inStock: boolean = faker.random.boolean();
-  dateReceipt: string = format(new Date(faker.date.past()), 'yyyy-MM-dd');
+  dateReceipt: string = moment(new Date(faker.date.past())).format('YYYY-MM-DD');
 }
 
 const dataset = Array.from(Array(datasetSize).keys()).map(() => new Product());
-
 
 const json = JSON.stringify(dataset);
 fs.writeFileSync('products.json', json, 'utf8', () => ({}));

@@ -1,43 +1,16 @@
-export enum ProductsFilter {
-  TYPE,
-  COLOR,
-  SIZE,
-  INSTOCK,
-  DATE,
-}
-
-export type ProductsFilterType = 'TYPE' | 'COLOR' | 'SIZE' | 'INSTOCK' | 'DATE';
-
-export const PRODUCTS_FILTER_TYPES = [
-  ProductsFilter.TYPE,
-  ProductsFilter.COLOR,
-  ProductsFilter.SIZE,
-  ProductsFilter.INSTOCK,
-  ProductsFilter.DATE,
-];
-
-export enum ProductsType {
+export const PRODUCT_TYPES = ['Верхняя одежда', 'Белье', 'Штанишки'];
+export enum PRODUCT_TYPE {
   'Верхняя одежда',
-  'Бельё',
+  'Белье',
   'Штанишки',
 }
+export type PRODUCT_TYPE_LITERAL = 'Верхняя одежда' | 'Белье' | 'Штанишки';
 
-export const PRODUCTS_TYPE_TYPES = [
-  ProductsType['Верхняя одежда'],
-  ProductsType['Бельё'],
-  ProductsType['Штанишки'],
-];
-
-export enum ProductsSize {
-  S, 
-  M,
-  L,
-  XL,
-}
-
-export const PRODUCTS_SIZE_TYPES = [
-  ProductsSize.S, 
-  ProductsSize.M,
-  ProductsSize.L,
-  ProductsSize.XL,
-];
+export const PRODUCT_SIZES = ['S', 'M', 'L', 'XL'];
+export enum PRODUCT_SIZE {
+  'S',
+  'M',
+  'L',
+  'XL',
+};
+export type PRODUCT_SIZE_LITERAL = 'S' | 'M' | 'L' | 'XL';

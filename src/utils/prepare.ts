@@ -3,6 +3,10 @@ const faker = require('faker/locale/ru');
 const fs = require('fs');
 const moment = require('moment');
 
+const datasetSize = 1000;
+const productTypes = ['Верхняя одежда', 'Белье', 'Штанишки'];
+const productSizes = ['S', 'M', 'L', 'XL'];
+
 const getRandomColor = (): string => {
   const rgb = Array(3).fill(null).map(() => {
     const component = _.random(0, 255).toString(16);
@@ -12,11 +16,6 @@ const getRandomColor = (): string => {
   const hexString = `#${rgb.join('')}`;
   return hexString;
 };
-
-const datasetSize = 1000;
-
-const productTypes = ['Верхняя одежда', 'Белье', 'Штанишки'];
-const productSizes = ['S', 'M', 'L', 'XL'];
 
 interface IProduct {
   id: number,
@@ -38,7 +37,11 @@ class Product implements IProduct {
   dateReceipt: string = moment(new Date(faker.date.past())).format('YYYY-MM-DD');
 }
 
+console.log('Generating dataset...');
 const dataset = Array.from(Array(datasetSize).keys()).map(() => new Product());
 
+console.log('Done! Saving...');
 const json = JSON.stringify(dataset);
-fs.writeFileSync('products.json', json, 'utf8', () => ({}));
+fs.writeFileSync('products.json', json, 'utf8');
+
+console.log('Saved!')

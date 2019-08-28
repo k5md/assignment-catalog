@@ -68,6 +68,7 @@ module.exports = {
             loader: 'css-loader',
             query: {
               importLoaders: 1,
+              sourceMap: false,
               modules: {
                 mode: 'local',
                 localIdentName: '[local]__[hash:base64:5]',
@@ -84,7 +85,9 @@ module.exports = {
                 }),
                 require('postcss-url')(),
                 require('postcss-cssnext')(),
-                require('postcss-reporter')(),
+                require('postcss-reporter')({
+                  disabled: true,
+                })
               ]
             }
           },

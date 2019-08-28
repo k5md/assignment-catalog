@@ -1,32 +1,34 @@
-/*import { mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from "react";
-import { Button, Input } from 'antd';
+import { DatePicker, Button } from 'antd';
+import moment from 'moment';
+import { DateRange } from "./"
 
-import { Color } from "./"
+const { RangePicker } = DatePicker;
 
-describe("Color", function() {
-  it("renders a color picker with a labeled button", () => {
+describe("DateRange", () => {
+  it("renders a rangePicker with a labeled button", () => {
     const onChange = jest.fn();
     const toggle = jest.fn();
 
     const props = {
-      value: '#fffffa',
+      value: ['2010-10-10', '2010-10-11'],
       onChange,
       isEnabled: true,
       toggle,
       title: 'Test',
     };
 
-    const wrapper = mount(<Color {...props} />);
-    const color = wrapper.find(Input);
+    const wrapper = mount(<DateRange {...props} />);
+    const rangePicker = wrapper.find(RangePicker);
     const button = wrapper.find(Button);
 
-    expect(color.instance().props.value).toEqual(props.value);
+    expect(rangePicker.instance().props.value).toEqual(props.value.map(d => moment(d));
     expect(button.instance().props.children).toEqual(props.title);
 
     button.at(0).simulate('click');
     expect(toggle).toHaveBeenCalled();
-    color.instance().props.onChange({ target: { value: '#aaafff' } });
+    rangePicker.instance().props.onChange(null, props.value);
     expect(onChange).toHaveBeenCalled();
   });
-})*/
+})

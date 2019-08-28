@@ -1,33 +1,33 @@
-/*import { mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from "react";
-import { Button, Input } from 'antd';
-
+import { Select as AntSelect, Button } from 'antd';
 import { Select } from "./"
 
-describe("Select", function() {
-  it("renders select, options, and a labeled button", () => {
+describe("Select", () => {
+  it("renders select and a labeled button", () => {
     const onChange = jest.fn();
     const toggle = jest.fn();
 
     const props = {
-      value: '#fffffa',
+      value: 'Foo',
       onChange,
       isEnabled: true,
       toggle,
       title: 'Test',
+      options: ['Foo', 'Bar', 'Baz'],
     };
 
     const wrapper = mount(<Select {...props} />);
-    const Select = wrapper.find(Input);
+    const select = wrapper.find(AntSelect);
     const button = wrapper.find(Button);
 
-    expect(Select.instance().props.value).toEqual(props.value);
     expect(button.instance().props.children).toEqual(props.title);
+    expect(select.instance().props.value).toEqual(props.value);
 
     button.at(0).simulate('click');
     expect(toggle).toHaveBeenCalled();
-    Select.instance().props.onChange({ target: { value: '#aaafff' } });
+
+    select.instance().props.onChange({ target: { value: 'Bar' } });
     expect(onChange).toHaveBeenCalled();
   });
 })
-*/

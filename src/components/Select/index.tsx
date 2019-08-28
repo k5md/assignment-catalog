@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Select as AntSelect, Button, Row, Col } from 'antd';
+import _ from 'lodash';
 
 const { Option } = AntSelect;
 
 export interface SelectProps {
-  value: Array<string>,
+  value: string,
   onChange: Function,
   isEnabled: boolean,
   toggle: Function,
@@ -28,7 +29,7 @@ export const Select = ({
       <AntSelect
         value={value}
         onChange={(value) => onChange(value)}
-        style={{ width: 200 }}
+        
       >
         {options.map(option => <Option key={_.uniqueId()} value={option}>{option}</Option>)}
       </AntSelect>

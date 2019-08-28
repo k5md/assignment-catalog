@@ -14,4 +14,7 @@ module.exports = {
       diagnostics: false
     }
   },
+  moduleNameMapper: {
+    "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+  },
 }

@@ -9,4 +9,9 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/setupEnzyme.ts'
   ],
+  globals: {
+    'ts-jest': {
+      diagnostics: false
+    }
+  },
 }

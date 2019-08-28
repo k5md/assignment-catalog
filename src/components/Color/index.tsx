@@ -15,7 +15,7 @@ export const Color = ({
   isEnabled,
   toggle,
   title
-}) => (
+}: ColorProps) => (
   <Row type="flex" align="middle" justify="space-between">
     <Col>
       <Button type={isEnabled ? 'primary' : 'dashed'} onClick={() => toggle()}>{title}</Button>

@@ -16,7 +16,7 @@ const filters = [
   { filterName: 'InDateRangeFilter', Component: DateRange, title: 'Период' },
 ];
 
-const FiltersContainer = ({
+export const FiltersContainer = ({
   [STORE_PRODUCTS]: { _filters }
 }) => (
   <InputGroup className={styles.container}>

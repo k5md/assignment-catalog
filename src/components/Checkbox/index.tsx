@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Checkbox as AntCheckbox, Row, Col, Button } from 'antd';
 
-export interface DateRangeProps {
-  value: Array<string>,
+export interface CheckboxProps {
+  value: boolean,
   onChange: Function,
   isEnabled: boolean,
   toggle: Function,
@@ -15,7 +15,7 @@ export const Checkbox = ({
   isEnabled,
   toggle,
   title,
-}) => (
+}: CheckboxProps) => (
   <Row type="flex" align="middle" justify="space-between">
     <Col>
       <Button type={isEnabled ? 'primary' : 'dashed'} onClick={() => toggle()}>{title}</Button>

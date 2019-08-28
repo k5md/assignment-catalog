@@ -19,7 +19,7 @@ export const Select = ({
   toggle,
   title,
   options,
-}) => (
+}: SelectProps) => (
   <Row type="flex" align="middle" justify="space-between">
     <Col>
       <Button type={isEnabled ? 'primary' : 'dashed'} onClick={() => toggle()}>{title}</Button>

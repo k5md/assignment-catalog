@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { STORE_PRODUCTS } from '../../constants';
 import { ProductTable } from '../../components/ProductTable';
 
-const ProductsContainer = ({
+export const ProductsContainer = ({
   [STORE_PRODUCTS]: { products }
 }) => (<ProductTable products={products} />)
 

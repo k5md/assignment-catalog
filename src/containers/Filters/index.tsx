@@ -1,10 +1,10 @@
 import * as React from 'react';
-import styles from './styles.css';
 import { observer, inject } from 'mobx-react';
-import { STORE_PRODUCTS, FILTER_TYPE, PRODUCT_SIZES, PRODUCT_TYPES } from '../../constants';
 import _ from 'lodash';
-import { Color, Checkbox, DateRange, Select } from '../../components';
 import { Input } from 'antd';
+import { STORE_PRODUCTS, FILTER_TYPE, PRODUCT_SIZES, PRODUCT_TYPES } from '../../constants';
+import { Color, Checkbox, DateRange, Select } from '../../components';
+import styles from './styles.css';
 
 const { Group: InputGroup } = Input;
 
@@ -16,12 +16,11 @@ const filters = [
   { filterName: 'InDateRangeFilter', Component: DateRange, title: 'Период' },
 ];
 
-@inject(STORE_PRODUCTS)
-@observer
-export class Filters extends React.Component {
-  render() {
-    const renderables = filters.map(({ filterName, Component, options, title }) => {
-      const { _filters } = this.props[STORE_PRODUCTS];
+const FiltersContainer = ({
+  [STORE_PRODUCTS]: { _filters }
+}) => (
+  <InputGroup className={styles.container}>
+    {filters.map(({ filterName, Component, options, title }) => {
       const filterIndex = FILTER_TYPE[filterName];
       const filter = _filters[filterIndex];
       return (
@@ -35,11 +34,8 @@ export class Filters extends React.Component {
           title={title}
         />
       );
-    });
-    return (
-      <InputGroup className={styles.container}>
-        {renderables}
-      </InputGroup>
-    );
-  }
-}
+    })}
+  </InputGroup>
+);
+
+export const Filters = inject(STORE_PRODUCTS)(observer(FiltersContainer));

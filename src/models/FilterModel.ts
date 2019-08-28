@@ -5,7 +5,6 @@ import {
   PRODUCT_TYPE_LITERAL,
   PRODUCT_SIZE_LITERAL,
 } from '../constants';
-import { copyFile } from 'fs';
 
 export interface IFilter {
   isEnabled: boolean,

@@ -9,6 +9,7 @@ export const createStore = (products) => {
         ...product,
         id: Number.parseInt(product.id),
       };
+      // @ts-ignore
       return Product.create(preparedProduct);
     }),
     _filters: FILTER_TYPES.map(filter => filter.create()),

@@ -31,7 +31,7 @@ export const ProductTable = ({ products }: ProductTableProps) => (
       >
         {headers.map(header => (
           <Column
-            key={_.uniqueId()}
+            key={() => _.uniqueId()}
             label={header}
             dataKey={header}
             width={width}

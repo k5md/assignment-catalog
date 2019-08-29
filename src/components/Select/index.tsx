@@ -23,13 +23,12 @@ export const Select = ({
 }: SelectProps) => (
   <Row type="flex" align="middle" justify="space-between">
     <Col>
-      <Button type={isEnabled ? 'primary' : 'dashed'} onClick={() => toggle()}>{title}</Button>
+      <Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>
     </Col>
     <Col>
       <AntSelect
         value={value}
-        onChange={(value) => onChange(value)}
-        
+        onChange={onChange}    
       >
         {options.map(option => <Option key={_.uniqueId()} value={option}>{option}</Option>)}
       </AntSelect>

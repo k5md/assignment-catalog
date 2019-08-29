@@ -18,10 +18,10 @@ export const Checkbox = ({
 }: CheckboxProps) => (
   <Row type="flex" align="middle" justify="space-between">
     <Col>
-      <Button type={isEnabled ? 'primary' : 'dashed'} onClick={() => toggle()}>{title}</Button>
+      <Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>
     </Col>
     <Col>
-      <AntCheckbox onChange={(e) => onChange(e.target.checked)} checked={value}></AntCheckbox>
+      <AntCheckbox onChange={onChange} checked={value}></AntCheckbox>
     </Col>
   </Row>
 );

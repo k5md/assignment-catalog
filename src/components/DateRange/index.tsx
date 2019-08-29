@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { DatePicker, Button, Row, Col } from 'antd';
-import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 
@@ -23,13 +22,13 @@ export const DateRange = ({
 }: DateRangeProps) => (
   <Row type="flex" align="middle" justify="space-between">
     <Col>
-      <Button type={isEnabled ? 'primary' : 'dashed'} onClick={() => toggle()}>{title}</Button>
+      <Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>
     </Col>
     <Col>
       <RangePicker
-        value={value.map(d => moment(d))}
+        value={value}
         format={dateFormat}
-        onChange={(moments, formatted) => onChange(...formatted)}
+        onChange={onChange}
       />
     </Col>
   </Row>

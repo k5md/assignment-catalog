@@ -7,6 +7,11 @@ export interface IFilterStore {
   inStock: boolean,
   dateRange: Array<string>,
 
+  setSize: Function,
+  setType: Function,
+  setInStock: Function,
+  setDateRange: Function,
+
   typeEnabled: boolean,
   sizeEnabled: boolean,
   inStockEnabled: boolean,
@@ -16,10 +21,6 @@ export interface IFilterStore {
   setSizeEnabled: Function,
   setInStockEnabled: Function,
   setDateRangeEnabled: Function,
-  setSize: Function,
-  setType: Function,
-  setInStock: Function,
-  setDateRange: Function,
 }
 
 export type FilterStoreModel = Instance<typeof FilterStore>;
@@ -67,9 +68,9 @@ export const FilterStore = types
   }))
   .actions((self) => {
     const setTypeEnabled = (value): void => self.typeEnabled = value;
-    const setSizeEnabled = (value): void => self.typeEnabled = value;
-    const setInStockEnabled = (value): void => self.typeEnabled = value;
-    const setDateRangeEnabled = (value): void => self.typeEnabled = value;
+    const setSizeEnabled = (value): void => self.sizeEnabled = value;
+    const setInStockEnabled = (value): void => self.inStockEnabled = value;
+    const setDateRangeEnabled = (value): void => self.dateRangeEnabled = value;
 
     const setSize = (value): void => self.size = value;
     const setType = (value): void => self.type = value;

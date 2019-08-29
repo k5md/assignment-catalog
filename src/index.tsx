@@ -6,13 +6,13 @@ import '!style-loader!css-loader?modules=false!react-virtualized/styles.css';
 
 import { createStore } from './stores/createStore';
 import productsJson from '../products.json';
-import { CatalogApp } from './containers/CatalogApp';
+import { Catalog } from './components/Catalog';
 
 const rootStore = createStore(productsJson);
 
 const App = () => (
-  <Provider {...rootStore}>
-    <CatalogApp />
+  <Provider store={rootStore}>
+    <Catalog />
   </Provider>
 );
 

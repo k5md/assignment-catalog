@@ -31,7 +31,6 @@ describe("Filters", () => {
 
     expect(wrapper.find(Checkbox)).toHaveLength(1);
     expect(wrapper.find(Select)).toHaveLength(2);
-    expect(wrapper.find(Color)).toHaveLength(1);
     expect(wrapper.find(DateRange)).toHaveLength(1);
   });
 });

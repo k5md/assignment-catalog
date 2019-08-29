@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { Row, Col } from 'antd';
+import { Layout } from 'antd';
 import { Products } from '../../containers/Products';
 import { FiltersContainer } from '../../containers/FiltersContainer';
 import * as styles from './styles.css';
 
+const { Content, Sider } = Layout;
+
 export const Catalog = () => (
-  <Row gutter={24} className={styles.root}>
-    <Col span={18} className={styles.content}>
+  <Layout className={styles.root}>
+    <Content className={styles.content}>
       <Products />
-    </Col>
-    <Col span={6} className={styles.sider}>
+    </Content>
+    <Sider className={styles.sider} theme="light">
       <FiltersContainer />
-    </Col>
-  </Row>
+    </Sider>
+  </Layout>
 );

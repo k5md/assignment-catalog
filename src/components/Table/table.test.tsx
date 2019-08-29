@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import React from "react";
-import { Table } from 'react-virtualized';
+import { Table as VirtualizedTable } from 'react-virtualized';
 
-import { ProductTable } from "./"
+import { Table } from "./"
 
 const products = [
   {
@@ -34,10 +34,12 @@ const products = [
   },
 ];
 
-describe("ProductTable", () => {
+const headers = ['id', 'name', 'type', 'color', 'size', 'inStock', 'dateReceipt'];
+
+describe("Table", () => {
   it("renders table", () => {
-    const wrapper = mount(<ProductTable products={products} />);
+    const wrapper = mount(<Table items={products} headers={headers} />);
     
-    expect(wrapper.exists(Table)).toBeTruthy();
+    expect(wrapper.exists(VirtualizedTable)).toBeTruthy();
   });
 });

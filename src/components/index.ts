@@ -1,5 +1,5 @@
 export * from './Checkbox';
 export * from './DateRange';
-export * from './ProductTable';
+export * from './Table';
 export * from './Select';
 export * from './Filters';

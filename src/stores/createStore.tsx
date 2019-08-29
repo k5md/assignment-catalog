@@ -1,10 +1,16 @@
 import React from 'react';
 import { useLocalStore } from 'mobx-react-lite';
+import { addMiddleware } from 'mobx-state-tree';
 import { IProduct, Product } from './Product';
 import { ProductStore } from './ProductStore'
 import { FilterStore } from './FilterStore';
 import { RootStore, RootStoreModel } from './RootStore';
 import productsJson from '../../products.json';
+
+export const log = store => addMiddleware(store, (call, next, abort) => {
+  console.log(`action ${call.name} was invoked`, call);
+  next(call);
+});
 
 export const createStore = (products) => {
   const productStore = ProductStore.create({
@@ -20,10 +26,15 @@ export const createStore = (products) => {
     }),
   });
   const filterStore = FilterStore.create();
+
   const rootStore = RootStore.create({
     productStore,
     filterStore,
   })
+
+  if (process.env.NODE_ENV === 'development') {
+    log(rootStore);
+  }
 
   return rootStore;
 };

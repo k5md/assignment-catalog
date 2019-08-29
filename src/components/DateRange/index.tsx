@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { DatePicker, Button, Row, Col } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -12,7 +12,7 @@ export interface DateRangeProps {
   dateFormat?: string,
 }
 
-export const DateRange = ({
+export const DateRange: React.FC<DateRangeProps> = ({
   value,
   onChange,
   isEnabled,

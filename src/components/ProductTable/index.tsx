@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { Column, Table, AutoSizer } from 'react-virtualized';
 import _ from 'lodash';
-import { IProduct } from '../../models/ProductModel';
+import { IProduct } from '../../stores/Product';
 
 export interface ProductTableProps {
   products: Array<IProduct>,

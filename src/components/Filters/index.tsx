@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Input } from 'antd';
 import { Checkbox, DateRange, Select } from '../';
 import styles from './styles.css';

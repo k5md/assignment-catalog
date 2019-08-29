@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Checkbox as AntCheckbox, Row, Col, Button } from 'antd';
 
 export interface CheckboxProps {
@@ -9,7 +9,7 @@ export interface CheckboxProps {
   title: string,
 }
 
-export const Checkbox = ({
+export const Checkbox: React.FC<CheckboxProps> = ({
   value,
   onChange,
   isEnabled,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Select as AntSelect, Button, Row, Col } from 'antd';
 import _ from 'lodash';
 
@@ -13,7 +13,7 @@ export interface SelectProps {
   options: Array<number | string | boolean>
 }
 
-export const Select = ({
+export const Select: React.FC<SelectProps> = ({
   value,
   onChange,
   isEnabled,

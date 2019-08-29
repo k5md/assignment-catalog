@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react';
 import _ from 'lodash';
 import moment from 'moment';

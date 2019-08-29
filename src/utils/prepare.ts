@@ -3,10 +3,6 @@ const faker = require('faker/locale/ru');
 const fs = require('fs');
 const moment = require('moment');
 
-const datasetSize = 1000;
-const productTypes = ['Верхняя одежда', 'Белье', 'Штанишки'];
-const productSizes = ['S', 'M', 'L', 'XL'];
-
 const getRandomColor = (): string => {
   const rgb = Array(3).fill(null).map(() => {
     const component = _.random(0, 255).toString(16);
@@ -17,17 +13,11 @@ const getRandomColor = (): string => {
   return hexString;
 };
 
-interface IProduct {
-  id: number,
-  type: 'Верхняя одежда' | 'Белье' | 'Штанишки',
-  name: string,
-  size: 'S' | 'M' | 'L' | 'XL',
-  color: string,
-  inStock: boolean,
-  dateReceipt: string,
-}
+const datasetSize = 1000;
+const productTypes = ['Верхняя одежда', 'Белье', 'Штанишки'];
+const productSizes = ['S', 'M', 'L', 'XL'];
 
-class Product implements IProduct {
+class Product {
   id: number =  _.uniqueId();
   name: string = faker.commerce.productName();
   type: 'Верхняя одежда' | 'Белье' | 'Штанишки' = faker.random.arrayElement(productTypes);

@@ -18,6 +18,7 @@ const cellRenderer = ({
   </div>
 );
 
+
 export const ProductTable = ({ products }: ProductTableProps) => (
   <AutoSizer>
     {({width, height}) => (
@@ -29,9 +30,9 @@ export const ProductTable = ({ products }: ProductTableProps) => (
         rowCount={products.length}
         rowGetter={({ index }) => products[index]}
       >
-        {headers.map(header => (
+        {headers.map((header, index)=> (
           <Column
-            key={() => _.uniqueId()}
+            key={index}
             label={header}
             dataKey={header}
             width={width}

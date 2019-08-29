@@ -1,14 +1,13 @@
 import _ from 'lodash';
-import { Product } from './ProductModel';
-import { PRODUCT_TYPES, PRODUCT_SIZES } from '../constants';
+import { Product } from './Product';
 
 describe('ProductModel', () => {
-  it('accepts types and sizes', () => {
+  it('returns own properties when getProduct is called', () => {
     const initialState = {
       id: 0,
-      type: PRODUCT_TYPES[0],
+      type: 'Верхняя одежда',
       name: 'nice mustbuy item',
-      size: PRODUCT_SIZES[0],
+      size: 'L',
       color: '#ffffff',
       inStock: true,
       dateReceipt: '10-10-2010',
@@ -16,8 +15,8 @@ describe('ProductModel', () => {
 
     const product = Product.create(initialState);
 
-    expect(product).toHaveProperty('type', PRODUCT_TYPES[0]);
-    expect(product).toHaveProperty('size', PRODUCT_SIZES[0]);
+    const props = product.getProduct();
+    expect(props).toEqual(initialState);
   })
 });
 

@@ -11,6 +11,8 @@ export const createStore = (products) => {
     _products: products.map((product) => {
       const preparedProduct: IProduct = {
         ...product,
+        type: product.type as IProduct['type'],
+        size: product.size as IProduct['size'],
         id: Number.parseInt(product.id),
       };
       // @ts-ignore

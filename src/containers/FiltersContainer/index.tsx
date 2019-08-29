@@ -7,8 +7,8 @@ import { Filters as FiltersComponent } from '../../components/Filters';
 
 export const FiltersContainer = () => {
   // WHYYYY
-  // With useStoreData, when passed identity function, dataSelector is not observing props, it needs
-  // to touch each reference.
+  // With useStoreData, when passed an identity function, dataSelector is not observing props, 
+  // it needs to touch each reference.
   const {
     type, setType, typeEnabled, setTypeEnabled,
     size, setSize, sizeEnabled, setSizeEnabled,

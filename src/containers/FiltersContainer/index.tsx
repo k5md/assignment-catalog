@@ -6,20 +6,19 @@ import { useStoreData } from '../../utils/hooks';
 import { Filters as FiltersComponent } from '../../components/Filters';
 
 export const FiltersContainer = () => {
-  // WHYYYY
-  // With useStoreData, when passed an identity function, dataSelector is not observing props, 
-  // it needs to touch each reference.
   const {
-    type, setType, typeEnabled, setTypeEnabled,
-    size, setSize, sizeEnabled, setSizeEnabled,
-    inStock, setInStock, inStockEnabled, setInStockEnabled,
-    dateRange, setDateRange, dateRangeEnabled, setDateRangeEnabled,
-  } = useStoreData(storeContext, store => store.filterStore, store => ({
-    type: store.type, setType: store.setType, typeEnabled: store.typeEnabled, setTypeEnabled: store.setTypeEnabled,
-    size: store.size, setSize: store.setSize, sizeEnabled: store.sizeEnabled, setSizeEnabled: store.setSizeEnabled,
-    inStock: store.inStock, setInStock: store.setInStock, inStockEnabled: store.inStockEnabled, setInStockEnabled: store.setInStockEnabled,
-    dateRange: store.dateRange, setDateRange: store.setDateRange, dateRangeEnabled: store.dateRangeEnabled, setDateRangeEnabled: store.setDateRangeEnabled,
-  }));
+    type, typeEnabled,
+    size, sizeEnabled,
+    inStock, inStockEnabled,
+    dateRange, dateRangeEnabled,
+  } = useStoreData(storeContext, store => store.filterStore, filterStore => filterStore.filterProps);
+
+  const {
+    setType, setTypeEnabled,
+    setSize, setSizeEnabled,
+    setInStock, setInStockEnabled,
+    setDateRange, setDateRangeEnabled,
+  } = useStoreData(storeContext, store => store.filterStore, filterStore => filterStore);
 
   return (
     <FiltersComponent

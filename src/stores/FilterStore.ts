@@ -41,6 +41,19 @@ export const FilterStore = types
     dateRangeEnabled: false,
   })
   .views((self) => ({
+    get filterProps() {
+      return {
+        type: self.type,
+        size: self.size,
+        inStock: self.inStock,
+        dateRange: self.dateRange,
+  
+        typeEnabled: self.typeEnabled,
+        sizeEnabled: self.sizeEnabled,
+        inStockEnabled: self.inStockEnabled,
+        dateRangeEnabled: self.dateRangeEnabled,
+      };
+    },
     get filters() {
       return (products) => {
         // O(4N)!!!

@@ -88,4 +88,3 @@ export const FilterStore = types
       setDateRange,
     };
   });
-

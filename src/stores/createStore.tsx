@@ -1,7 +1,10 @@
+import React from 'react';
+import { useLocalStore } from 'mobx-react-lite';
 import { IProduct, Product } from './Product';
 import { ProductStore } from './ProductStore'
 import { FilterStore } from './FilterStore';
-import { RootStore } from './RootStore';
+import { RootStore, RootStoreModel } from './RootStore';
+import productsJson from '../../products.json';
 
 export const createStore = (products) => {
   const productStore = ProductStore.create({
@@ -21,4 +24,17 @@ export const createStore = (products) => {
   })
 
   return rootStore;
+};
+
+export type StoreType = RootStoreModel;
+
+export const storeContext = React.createContext<StoreType | null>(null);
+
+export const StoreProvider = ({ children }) => {
+  const store = useLocalStore(() => createStore(productsJson));
+  return (
+    <storeContext.Provider value={store}>
+      {children}
+    </storeContext.Provider>
+  );
 };

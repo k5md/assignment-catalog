@@ -1,53 +1,43 @@
 import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
+import { useObservable, useObserver } from 'mobx-react-lite';
 import { storeContext } from '../../stores/createStore';
-import { useStoreData } from '../../utils/hooks';
+import { useStoreData, useFilters } from '../../utils/hooks';
 import { Filters as FiltersComponent } from '../../components/Filters';
 
+
 export const FiltersContainer = () => {
-  const {
-    type, typeEnabled,
-    size, sizeEnabled,
-    inStock, inStockEnabled,
-    dateRange, dateRangeEnabled,
-  } = useStoreData(storeContext, store => store.filterStore, filterStore => filterStore.filterProps);
+  const { type, size, stock, dateRange } = useFilters(storeContext);
 
-  const {
-    setType, setTypeEnabled,
-    setSize, setSizeEnabled,
-    setInStock, setInStockEnabled,
-    setDateRange, setDateRangeEnabled,
-  } = useStoreData(storeContext, store => store.filterStore, filterStore => filterStore);
-
-  return (
+  return useObserver(() => (
     <FiltersComponent
       type={{
-        value: type,
-        onChange: value => setType(value),
-        isEnabled: typeEnabled,
-        toggle: () => setTypeEnabled(!typeEnabled),
+        value: type.value,
+        onChange: value => type.setValue(value),
+        isEnabled: type.enabled,
+        toggle: type.toggle,
         options: ['Белье', 'Штанишки', 'Верхняя одежда'],
       }}
       size={{
-        value: size,
-        onChange: value => setSize(value),
-        isEnabled: sizeEnabled,
-        toggle: () => setSizeEnabled(!sizeEnabled),
+        value: size.value,
+        onChange: value => size.setValue(value),
+        isEnabled: size.enabled,
+        toggle: size.toggle,
         options: ['S', 'M', 'L', 'XL'],
       }}
       inStock={{
-        value: inStock,
-        onChange: e => setInStock(e.target.checked),
-        isEnabled: inStockEnabled,
-        toggle: () => setInStockEnabled(!inStockEnabled),
+        value: stock.value,
+        onChange: ({ target: { checked } }) => stock.setValue(checked),
+        isEnabled: stock.enabled,
+        toggle: stock.toggle,
       }}
       dateRange={{
-        value: dateRange.map(d => moment(d)),
-        onChange: (moments, formatted) => setDateRange(formatted),
-        isEnabled: dateRangeEnabled,
-        toggle: () => setDateRangeEnabled(!dateRangeEnabled),
+        value: dateRange.value.map(d => moment(d)),
+        onChange: (moments, formatted) => dateRange.setValue(formatted),
+        isEnabled: dateRange.enabled,
+        toggle: dateRange.toggle,
       }}
     />
-  );
+  ));
 };

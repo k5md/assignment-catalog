@@ -1,11 +1,12 @@
 import React from 'react';
 import { useLocalStore } from 'mobx-react-lite';
 import { addMiddleware } from 'mobx-state-tree';
-import { IProduct, Product } from './Product';
+import { Product } from './Product';
 import { ProductStore } from './ProductStore'
 import { FilterStore } from './FilterStore';
-import { RootStore, RootStoreModel } from './RootStore';
+import { RootStore } from './RootStore';
 import productsJson from '../../products.json';
+import { DateRangeFilter, TypeFilter, SizeFilter, StockFilter } from './Filter';
 
 export const log = store => addMiddleware(store, (call, next, abort) => {
   console.log(`action ${call.name} was invoked`, call);
@@ -15,17 +16,24 @@ export const log = store => addMiddleware(store, (call, next, abort) => {
 export const createStore = (products) => {
   const productStore = ProductStore.create({
     _products: products.map((product) => {
-      const preparedProduct: IProduct = {
+      const preparedProduct: Product = {
         ...product,
-        type: product.type as IProduct['type'],
-        size: product.size as IProduct['size'],
+        type: product.type as Product['type'],
+        size: product.size as Product['size'],
         id: Number.parseInt(product.id),
       };
-      // @ts-ignore
       return Product.create(preparedProduct);
     }),
   });
-  const filterStore = FilterStore.create();
+
+  const filterStore = FilterStore.create({
+    _filters: [
+      StockFilter.create(),
+      DateRangeFilter.create(),
+      TypeFilter.create(),
+      SizeFilter.create(),
+    ],
+  });
 
   const rootStore = RootStore.create({
     productStore,
@@ -39,9 +47,7 @@ export const createStore = (products) => {
   return rootStore;
 };
 
-export type StoreType = RootStoreModel;
-
-export const storeContext = React.createContext<StoreType | null>(null);
+export const storeContext = React.createContext<RootStore | null>(null);
 
 export const StoreProvider = ({ children }) => {
   const store = useLocalStore(() => createStore(productsJson));

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { RootStore } from './RootStore';
 
-const products = [
+const initialProducts = [
   {
     "id": 1,
     "name":"Маленький Хлопковый Берет",
@@ -29,7 +29,7 @@ import { Product } from './Product';
 describe('RootStore', () => {
   jest.mock('./ProductStore');
   jest.mock('./FilterStore');
-  const _products = products.map(product => Product.create(product))
+  const _products = initialProducts.map(product => Product.create(product))
   const productStore = ProductStore.create({ _products });
   const filterStore = FilterStore.create();
 

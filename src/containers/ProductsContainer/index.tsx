@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, CellRendererProps } from '../../components/Table';
 import { storeContext } from '../../stores/createStore';
 import { useStoreData } from '../../utils/hooks';
-import { IProduct } from '../../stores/Product';
+import { Product } from '../../stores/Product';
 
 const headers = ['id', 'name', 'type', 'color', 'size', 'inStock', 'dateReceipt'];
 
@@ -16,7 +16,7 @@ const cellRenderer: React.FC<CellRendererProps> = ({
 );
 
 export const ProductsContainer = () => {
-  const products: Array<IProduct> = useStoreData(
+  const products: Array<Product> = useStoreData(
     storeContext, store => store, store => store.products
   );
 

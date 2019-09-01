@@ -1,9 +1,5 @@
 import { types, Instance } from 'mobx-state-tree';
-import { Product, IProduct } from './Product';
-
-export interface IProductStore {
-  products: Array<IProduct>,
-}
+import { Product } from './Product';
 
 export type ProductStore = Instance<typeof ProductStore>;
 

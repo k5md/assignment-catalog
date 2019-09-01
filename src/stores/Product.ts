@@ -1,15 +1,5 @@
 import { types, Instance } from 'mobx-state-tree';
 
-export interface IProduct {
-  id: number,
-  type: 'Верхняя одежда' | 'Белье' | 'Штанишки',
-  name: string,
-  size: 'S' | 'M' | 'L' | 'XL',
-  color: string,
-  inStock: boolean,
-  dateReceipt: string,
-}
-
 export type Product = Instance<typeof Product>;
 
 export const Product = types
@@ -22,10 +12,6 @@ export const Product = types
     inStock: types.boolean,
     dateReceipt: types.string,
   })
-  .views((self) => {
-    const getProduct = () => {
-      return { ...self };
-    }
-
-    return { getProduct };
-  });
+  .views((self) => ({
+    getProduct: () => { return self; }
+  }));

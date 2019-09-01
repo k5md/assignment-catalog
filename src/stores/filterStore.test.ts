@@ -60,7 +60,7 @@ describe('FilterModel', () => {
     test(`${filterName} filters array on related property`, () => {
        // filterName => setFilterNameEnabled
       const toggle = `set${_.upperFirst(filterName)}Enabled`;
-      filterStore[toggle](true);
+      filterStore[toggle]();
       const filtered = filterStore.filters(products);
       expect(filtered.length).toEqual(expectedLength);
     });

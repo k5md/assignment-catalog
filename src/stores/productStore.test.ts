@@ -1,7 +1,7 @@
-import { IProduct, Product } from './Product';
+import { Product } from './Product';
 import { ProductStore } from './ProductStore';
 
-const products = [
+const initialProducts = [
   {
     "id":1,
     "name":"Маленький Хлопковый Берет",
@@ -34,17 +34,17 @@ const products = [
 describe('productStoreModel', () => {
   it('returns all products if created without filters', () => {
     const store = ProductStore.create({
-      _products: products.map((product): Array<Product>  => {
-        const preparedProduct: IProduct = {
+      _products: initialProducts.map((product): Array<Product>  => {
+        const preparedProduct: Product = {
           ...product,
-          type: product.type as IProduct['type'],
-          size: product.size as IProduct['size'],
+          type: product.type as Product['type'],
+          size: product.size as Product['size'],
           id: product.id,
         };
         // @ts-ignore
         return Product.create(preparedProduct);
       }),
     });
-    expect(store.products).toEqual(products);
+    expect(store.products).toEqual(initialProducts);
   })
 });

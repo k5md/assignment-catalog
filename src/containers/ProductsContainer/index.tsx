@@ -7,18 +7,18 @@ import { Product } from '../../stores/Product';
 const headers = ['id', 'name', 'type', 'color', 'size', 'inStock', 'dateReceipt'];
 
 const cellRenderer: React.FC<CellRendererProps> = ({
-  cellData,
-  dataKey,
+	cellData,
+	dataKey,
 }) => (
-  <div style={{backgroundColor: dataKey === 'color' ? cellData : 'unset'}}>
-    {cellData.toString()}
-  </div>
+	<div style={{backgroundColor: dataKey === 'color' ? cellData : 'unset'}}>
+		{cellData.toString()}
+	</div>
 );
 
 export const ProductsContainer = () => {
-  const products: Array<Product> = useStoreData(
-    storeContext, store => store, store => store.products
-  );
+	const products: Array<Product> = useStoreData(
+		storeContext, store => store, store => store.products
+	);
 
-  return (<Table items={products} headers={headers} cellRenderer={cellRenderer}/>);
+	return (<Table items={products} headers={headers} cellRenderer={cellRenderer}/>);
 }

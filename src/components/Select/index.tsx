@@ -5,33 +5,33 @@ import _ from 'lodash';
 const { Option } = AntSelect;
 
 export interface SelectProps {
-  value: string,
-  onChange: Function,
-  isEnabled: boolean,
-  toggle: Function,
-  title: string,
-  options: Array<number | string | boolean>
+	value: string,
+	onChange: Function,
+	isEnabled: boolean,
+	toggle: Function,
+	title: string,
+	options: Array<number | string | boolean>
 }
 
 export const Select: React.FC<SelectProps> = ({
-  value,
-  onChange,
-  isEnabled,
-  toggle,
-  title,
-  options,
+	value,
+	onChange,
+	isEnabled,
+	toggle,
+	title,
+	options,
 }: SelectProps) => (
-  <Row type="flex" align="middle" justify="space-between">
-    <Col>
-      <Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>
-    </Col>
-    <Col>
-      <AntSelect
-        value={value}
-        onChange={onChange}    
-      >
-        {options.map(option => <Option key={_.uniqueId()} value={option}>{option}</Option>)}
-      </AntSelect>
-    </Col>
-  </Row>
+	<Row type="flex" align="middle" justify="space-between">
+		<Col>
+			<Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>
+		</Col>
+		<Col>
+			<AntSelect
+				value={value}
+				onChange={onChange}    
+			>
+				{options.map(option => <Option key={_.uniqueId()} value={option}>{option}</Option>)}
+			</AntSelect>
+		</Col>
+	</Row>
 );

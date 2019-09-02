@@ -14,7 +14,7 @@ export const Filter = types
 		value: types.undefined,
 	})
 	.actions((self) => ({
-		toggle: (): void => self.enabled = !self.enabled,
+		toggle: (): void => { self.enabled = !self.enabled },
 		setValue: (newValue) => { self.value = newValue; },
 	}));
 
@@ -65,3 +65,5 @@ export const DateRangeFilter = types.compose('DateRangeFilter', Filter, types
 		},
 	}))
 );
+
+export const FilterTypes = types.union(TypeFilter, SizeFilter, StockFilter, DateRangeFilter);

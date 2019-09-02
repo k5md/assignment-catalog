@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox as AntCheckbox, Row, Col, Button } from 'antd';
 
-export interface CheckboxProps {
+export interface Checkbox {
 	value: boolean,
 	onChange: Function,
 	isEnabled: boolean,
@@ -9,13 +9,13 @@ export interface CheckboxProps {
 	title: string,
 }
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox: React.FC<Checkbox> = ({
 	value,
 	onChange,
 	isEnabled,
 	toggle,
 	title,
-}: CheckboxProps) => (
+}: Checkbox) => (
 	<Row type="flex" align="middle" justify="space-between">
 		<Col>
 			<Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>

@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 const { Option } = AntSelect;
 
-export interface SelectProps {
+export interface Select {
 	value: string,
 	onChange: Function,
 	isEnabled: boolean,
@@ -13,14 +13,14 @@ export interface SelectProps {
 	options: Array<number | string | boolean>
 }
 
-export const Select: React.FC<SelectProps> = ({
+export const Select: React.FC<Select> = ({
 	value,
 	onChange,
 	isEnabled,
 	toggle,
 	title,
 	options,
-}: SelectProps) => (
+}: Select) => (
 	<Row type="flex" align="middle" justify="space-between">
 		<Col>
 			<Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>

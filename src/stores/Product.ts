@@ -13,5 +13,5 @@ export const Product = types
 		dateReceipt: types.string,
 	})
 	.views((self) => ({
-		getProduct: () => { return self; }
+		getProduct: (): Product => { return self; }
 	}));

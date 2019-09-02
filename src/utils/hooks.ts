@@ -18,6 +18,6 @@ export const useStoreData = <Selection, ContextData, Store>(
 
 export const useFilters = (context) => useStoreData(
 	context,
-	store => store.filterStore!,
+	store => store.filterStore,
 	filterStore => filterStore.filters,
 );

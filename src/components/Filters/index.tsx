@@ -1,5 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
+import moment from 'moment';
+import { useObserver } from 'mobx-react-lite';
 import { Checkbox, DateRange, Select } from '../';
 import styles from './styles.css';
 
@@ -10,7 +12,7 @@ export const Filters = ({
 	stock,
 	size,
 	dateRange,
-}) => (
+}) => useObserver(() => (
 	<InputGroup className={styles.container}>
 		<Select
 			title="Тип"
@@ -43,4 +45,4 @@ export const Filters = ({
 			toggle={dateRange.toggle}
 		/>
 	</InputGroup>
-);
+));

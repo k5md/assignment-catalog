@@ -3,7 +3,7 @@ import { DatePicker, Button, Row, Col } from 'antd';
 
 const { RangePicker } = DatePicker;
 
-export interface DateRangeProps {
+export interface DateRange {
 	value: Array<string>,
 	onChange: Function,
 	isEnabled: boolean,
@@ -12,14 +12,14 @@ export interface DateRangeProps {
 	dateFormat?: string,
 }
 
-export const DateRange: React.FC<DateRangeProps> = ({
+export const DateRange: React.FC<DateRange> = ({
 	value,
 	onChange,
 	isEnabled,
 	toggle,
 	title,
 	dateFormat = 'YYYY-MM-DD',
-}: DateRangeProps) => (
+}: DateRange) => (
 	<Row type="flex" align="middle" justify="space-between">
 		<Col>
 			<Button type={isEnabled ? 'primary' : 'dashed'} onClick={toggle}>{title}</Button>

@@ -1,5 +1,6 @@
 import { types, Instance } from 'mobx-state-tree';
 import moment from 'moment';
+import { Product } from './Product';
 
 export type Filter = Instance<typeof Filter>;
 export type TypeFilter = Instance<typeof TypeFilter>;
@@ -13,7 +14,7 @@ export const Filter = types
 		value: types.undefined,
 	})
 	.actions((self) => ({
-		toggle: () => self.enabled = !self.enabled,
+		toggle: (): void => self.enabled = !self.enabled,
 		setValue: (newValue) => { self.value = newValue; },
 	}));
 
@@ -23,7 +24,7 @@ export const TypeFilter = types.compose('TypeFilter', Filter, types
 		type: 'type',
 	})
 	.views((self) => ({
-		filter: product => product.type === self.value,
+		filter: (product: Product): boolean => product.type === self.value,
 	}))
 );
 
@@ -33,7 +34,7 @@ export const SizeFilter = types.compose('SizeFilter', Filter, types
 		type: 'size',
 	})
 	.views((self) => ({
-		filter: product => product.size === self.value,
+		filter: (product: Product): boolean => product.size === self.value,
 	}))
 );
 
@@ -43,7 +44,7 @@ export const StockFilter = types.compose('StockFilter', Filter, types
 		type: 'stock',
 	})
 	.views((self) => ({
-		filter: product => product.inStock === self.value,
+		filter: (product: Product): boolean => product.inStock === self.value,
 	}))
 );
 
@@ -56,7 +57,7 @@ export const DateRangeFilter = types.compose('DateRangeFilter', Filter, types
 		type: 'dateRange',
 	})
 	.views((self) => ({
-		filter: (product) => {
+		filter: (product: Product): boolean => {
 			const [ start, end ] = self.value;
 			const afterStart = moment(product.dateReceipt).diff(moment(start)) >= 0;
 			const beforeEnd = moment(end).diff(moment(product.dateReceipt)) >= 0;

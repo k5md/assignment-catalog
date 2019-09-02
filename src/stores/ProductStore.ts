@@ -8,7 +8,7 @@ export const ProductStore = types
 		_products: types.array(Product),
 	})
 	.views((self) => ({
-		get products() {
+		get products(): Array<Product> {
 			return self._products.map(product => product.getProduct());
 		},
 	}));

@@ -1,18 +1,18 @@
 import React from 'react';
 import { Column, Table as VirtualizedTable, AutoSizer } from 'react-virtualized';
 
-export interface CellRendererProps {
+export interface CellRenderer {
 	cellData,
 	dataKey,
 }
 
-export interface TableProps {
+export interface Table {
 	items: Array<Object>,
 	headers: Array<string>,
-	cellRenderer?: React.FC<CellRendererProps>
+	cellRenderer?: React.FC<CellRenderer>
 }
 
-export const Table = ({ items, headers, cellRenderer }: TableProps) => {
+export const Table = ({ items, headers, cellRenderer }: Table) => {
 	const rowGetter = ({ index }) => items[index];
 	return (
 		<AutoSizer>

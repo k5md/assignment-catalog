@@ -1,5 +1,5 @@
 import { types, Instance } from 'mobx-state-tree';
-import { DateRangeFilter, TypeFilter, SizeFilter, StockFilter } from './Filter';
+import { Filter, DateRangeFilter, TypeFilter, SizeFilter, StockFilter } from './Filter';
 
 export type FilterStore = Instance<typeof FilterStore>;
 
@@ -21,7 +21,7 @@ export const FilterStore = types
 		_filters: types.array(anyFilter),
 	})
 	.views((self) => ({
-		get filters() {
+		get filters(): Array<Filter> {
 			// _filters -> { [filterType]: filter, ... }
 			return self._filters.reduce((acc, cur) => ({...acc, [cur.type]: cur}), {});
 		},

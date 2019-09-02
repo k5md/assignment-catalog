@@ -1,9 +1,9 @@
 import React from 'react';
-import { Table, CellRendererProps } from '../';
+import { Table, CellRenderer } from '../';
 
 const headers = ['id', 'name', 'type', 'color', 'size', 'inStock', 'dateReceipt'];
 
-const cellRenderer: React.FC<CellRendererProps> = ({
+const cellRenderer: React.FC<CellRenderer> = ({
 	cellData,
 	dataKey,
 }) => (

@@ -4,9 +4,9 @@ import { Filters } from '../Filters';
 import { Checkbox, Select, DateRange } from '../../components';
 
 const commonProps = {
-	isEnabled: false,
+	enabled: false,
 	toggle: () => ({}),
-	onChange: () => ({}),
+	setValue: () => ({}),
 };
 
 const filterProps = {
@@ -20,7 +20,7 @@ const filterProps = {
 		value: 'S',
 		options: ['S', 'M', 'L', 'XL'],
 	},
-	inStock: {
+	stock: {
 		...commonProps,
 		value: false,
 	},

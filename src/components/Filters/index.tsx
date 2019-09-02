@@ -7,7 +7,7 @@ const { Group: InputGroup } = Input;
 
 export const Filters = ({
 	type,
-	inStock,
+	stock,
 	size,
 	dateRange,
 }) => (
@@ -15,31 +15,31 @@ export const Filters = ({
 		<Select
 			title="Тип"
 			value={type.value}
-			onChange={type.onChange}
-			isEnabled={type.isEnabled}
+			onChange={value => type.setValue(value)}
+			isEnabled={type.enabled}
 			toggle={type.toggle}
-			options={type.options}
+			options={ ['Белье', 'Штанишки', 'Верхняя одежда']}
 		/>
 		<Checkbox
 			title="В наличии"
-			value={inStock.value}
-			onChange={inStock.onChange}
-			isEnabled={inStock.isEnabled}
-			toggle={inStock.toggle}
+			value={stock.value}
+			onChange={({ target: { checked } }) => stock.setValue(checked)}
+			isEnabled={stock.enabled}
+			toggle={stock.toggle}
 		/>
 		<Select
 			title="Размер"
 			value={size.value}
-			onChange={size.onChange}
-			isEnabled={size.isEnabled}
+			onChange={value => size.setValue(value)}
+			isEnabled={size.enabled}
 			toggle={size.toggle}
-			options={size.options}
+			options={['S', 'M', 'L', 'XL']}
 		/>
 		<DateRange
 			title="Период"
-			value={dateRange.value}
-			onChange={dateRange.onChange}
-			isEnabled={dateRange.isEnabled}
+			value={dateRange.value.map(d => moment(d))}
+			onChange={(moments, formatted) => dateRange.setValue(formatted)}
+			isEnabled={dateRange.enabled}
 			toggle={dateRange.toggle}
 		/>
 	</InputGroup>
